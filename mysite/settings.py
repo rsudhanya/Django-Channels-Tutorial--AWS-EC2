@@ -22,12 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ms-rfr5^0achzpexff$x@*b0-jkg07)r*au799#n@!3j^6!#6x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 
+#By default
+# DEBUG = True
 # ALLOWED_HOSTS = []
 
-DEBUG = os.environ.get('DEBUG', True)
-
+#For EC2 Hosting
+DEBUG = os.environ.get('DEBUG', False)
 ALLOWED_HOSTS = ['*']
 
 
@@ -74,8 +75,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# mysite/settings.py
-# Channels
+#By Default
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#     },
+# }
+
+#For EC2 Hosting 
 ASGI_APPLICATION = 'mysite.routing.application'
 CHANNEL_LAYERS = {
     'default': {
